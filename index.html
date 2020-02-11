@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+      <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        
+        <link rel="stylesheet" href="css/leaflet-sidebar.min.css">	
+		<link rel="stylesheet" href="css/qgis2web.css">		
+
+        <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #map {
+            height:100%;
+            width:100%;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+
+        <!-- nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <!-- top aligned tabs -->
+            <ul role="tablist">
+                <li><a href="#autopan" role="tab"><i class="fa fa-snowflake-o" aria-hidden="true"></i></a></li>
+            </ul>
+
+            <!-- bottom aligned tabs -->
+            <ul role="tablist">
+                <li><a href="https://github.com/dillonchaffey"><i class="fa fa-github"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+
+            <div class="leaflet-sidebar-pane" id="autopan">
+                <h1 class="leaflet-sidebar-header">
+                    Layers
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <div id="layer-control"></div>
+            </div>
+        </div>
+    </div>	
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+
+		
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-sidebar.min.js"></script>
+        <script src="data/WatershedKGofSaltperApplicationperkm2_1.js"></script>
+        <script src="data/Roads_2.js"></script>
+        <script src="data/WaterFeatures_3_2.js"></script>
+        <script src="data/RoadsWithin50MetersofWaterFeatures_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[44.583588465807715,-65.3845008984672],[45.12679066824059,-64.53581562461834]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_WatershedKGofSaltperApplicationperkm2_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">Water shed recieves ' + (feature.properties['SaltSumK2'] ? feature.properties['SaltSumK2'] : 0) +' kg of salt per application per km2</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_WatershedKGofSaltperApplicationperkm2_1_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_WatershedKGofSaltperApplicationperkm2_1rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_WatershedKGofSaltperApplicationperkm2_1rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(233,233,233,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_WatershedKGofSaltperApplicationperkm2_1rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,210,210,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_WatershedKGofSaltperApplicationperkm2_1rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(187,187,187,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_WatershedKGofSaltperApplicationperkm2_1rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,164,164,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {
+                pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            };
+            }
+        }
+        map.createPane('pane_WatershedKGofSaltperApplicationperkm2_1');
+        map.getPane('pane_WatershedKGofSaltperApplicationperkm2_1').style.zIndex = 401;
+        map.getPane('pane_WatershedKGofSaltperApplicationperkm2_1').style['mix-blend-mode'] = 'normal';
+        var layer_WatershedKGofSaltperApplicationperkm2_1 = new L.geoJson(json_WatershedKGofSaltperApplicationperkm2_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_WatershedKGofSaltperApplicationperkm2_1',
+            layerName: 'layer_WatershedKGofSaltperApplicationperkm2_1',
+            pane: 'pane_WatershedKGofSaltperApplicationperkm2_1',
+            onEachFeature: pop_WatershedKGofSaltperApplicationperkm2_1,
+            style: style_WatershedKGofSaltperApplicationperkm2_1_0,
+        });
+        bounds_group.addLayer(layer_WatershedKGofSaltperApplicationperkm2_1);
+        map.addLayer(layer_WatershedKGofSaltperApplicationperkm2_1);
+        function pop_Roads_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FEAT_CODE'] !== null ? Autolinker.link(feature.properties['FEAT_CODE'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? Autolinker.link(feature.properties['NAME'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Roads_2_0(feature) {
+            switch(String(feature.properties['FEAT_CODE'])) {
+                case 'RRBRHWY1':
+                    return {
+                pane: 'pane_Roads_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Roads_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Roads_2');
+        map.getPane('pane_Roads_2').style.zIndex = 402;
+        map.getPane('pane_Roads_2').style['mix-blend-mode'] = 'normal';
+        var layer_Roads_2 = new L.geoJson(json_Roads_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Roads_2',
+            layerName: 'layer_Roads_2',
+            pane: 'pane_Roads_2',
+            onEachFeature: pop_Roads_2,
+            style: style_Roads_2_0,
+        });
+        bounds_group.addLayer(layer_Roads_2);
+        map.addLayer(layer_Roads_2);
+        function pop_WaterFeatures_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FEAT_CODE'] !== null ? Autolinker.link(feature.properties['FEAT_CODE'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RIVNAME_1'] !== null ? Autolinker.link(feature.properties['RIVNAME_1'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_WaterFeatures_3_0(feature) {
+            switch(String(feature.properties['RIVNAME_1'])) {
+                case 'Annapolis River':
+                    return {
+                pane: 'pane_WaterFeatures_3',
+                opacity: 1,
+                color: 'rgba(12,0,254,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_WaterFeatures_3',
+                opacity: 1,
+                color: 'rgba(1,13,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }}
+        map.createPane('pane_WaterFeatures_3');
+        map.getPane('pane_WaterFeatures_3').style.zIndex = 403;
+        map.getPane('pane_WaterFeatures_3').style['mix-blend-mode'] = 'normal';
+        var layer_WaterFeatures_3 = new L.geoJson(json_WaterFeatures_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_WaterFeatures_3',
+            layerName: 'layer_WaterFeatures_3',
+            pane: 'pane_WaterFeatures_3',
+            onEachFeature: pop_WaterFeatures_3,
+            style: style_WaterFeatures_3_0,
+        });
+        bounds_group.addLayer(layer_WaterFeatures_3);
+        map.addLayer(layer_WaterFeatures_3);
+        function pop_RoadsWithin50MetersofWaterFeatures_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FEAT_CODE'] !== null ? Autolinker.link(feature.properties['FEAT_CODE'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? Autolinker.link(feature.properties['NAME'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RoadsWithin50MetersofWaterFeatures_4_0() {
+            return {
+                pane: 'pane_RoadsWithin50MetersofWaterFeatures_4',
+                opacity: 1,
+                color: 'rgba(254,0,42,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_RoadsWithin50MetersofWaterFeatures_4');
+        map.getPane('pane_RoadsWithin50MetersofWaterFeatures_4').style.zIndex = 404;
+        map.getPane('pane_RoadsWithin50MetersofWaterFeatures_4').style['mix-blend-mode'] = 'normal';
+        var layer_RoadsWithin50MetersofWaterFeatures_4 = new L.geoJson(json_RoadsWithin50MetersofWaterFeatures_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RoadsWithin50MetersofWaterFeatures_4',
+            layerName: 'layer_RoadsWithin50MetersofWaterFeatures_4',
+            pane: 'pane_RoadsWithin50MetersofWaterFeatures_4',
+            onEachFeature: pop_RoadsWithin50MetersofWaterFeatures_4,
+            style: style_RoadsWithin50MetersofWaterFeatures_4_0,
+        });
+        bounds_group.addLayer(layer_RoadsWithin50MetersofWaterFeatures_4);
+        map.addLayer(layer_RoadsWithin50MetersofWaterFeatures_4);
+        var baseMaps = {};
+        var layerControl = L.control.layers(baseMaps,{'Roads Within 50 Meters of Water Features': layer_RoadsWithin50MetersofWaterFeatures_4,'Water Features<br />': layer_WaterFeatures_3,'Roads<br /><table>': layer_Roads_2,'Watershed - KG of Salt per Application per km2<br /><table><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_790503107100.png" /></td><td>7.9050 - 31.0710</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_3107106308501.png" /></td><td>31.0710 - 63.0850</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_63085011820302.png" /></td><td>63.0850 - 118.2030</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_118203015409503.png" /></td><td>118.2030 - 154.0950</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_154095019251504.png" /></td><td>154.0950 - 192.5150</td></tr></table>': layer_WatershedKGofSaltperApplicationperkm2_1,"Basemap": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        var htmlObject = layerControl.getContainer();
+        var a = document.getElementById('layer-control').appendChild(htmlObject);
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // create the sidebar instance and add it to the map
+        var sidebar = L.control.sidebar({ container: 'sidebar', autopan: true })
+            .addTo(map)
+//            .open('autopan');
+
+        // add panels dynamically to the sidebar
+        sidebar
+            .addPanel({
+                id:   'methodology',
+                tab:  '<i class="fa fa-map-o" aria-hidden="true"></i>',
+                title: 'Methodology',
+                pane:   '<p>Here in Nova Scotia we have to deal with unsafe road conditions each winter and salting the roads is an unfortunate nescessity.</p>' +
+                        '<p>The salt we put on our roads eventually finds it\'s way into our water table and can contaminate our environment.</p>' +
+                        '<p>This map shows the watersheds in the Greenwood/Kingston area and is color coded to visualize the amount of salt they recieve per square kilometer of the watershed.</p>' +
+                        '<p>Water features are also shown and roads which come within 50 meters of these water features are highlighted as well.</p>'
+            })
+            // add a tab with a click callback, initially disabled
+            .addPanel({
+                id:   'datasources',
+                tab:  '<i class="fa fa-database" aria-hidden="true"></i>',
+                title: 'Datasources',
+                pane: '<ul><li>links</li><li>to</li><li>data</li><li>sources</li><li>here</li></ul>'
+            })
+        
+        sidebar.open('methodology')
+		
+        //setBounds();
+        </script>
+    </body>
+</html>
