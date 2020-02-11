@@ -41,12 +41,12 @@
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
             <ul role="tablist">
-                <li><a href="#autopan" role="tab"><i class="fa fa-snowflake-o" aria-hidden="true"></i></a></li>
+                <li><a href="#autopan" role="tab"><i class="fa fa-clone" aria-hidden="true"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
             <ul role="tablist">
-                <li><a href="https://github.com/dillonchaffey"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://github.com/dillonchaffey/Road_Salt"><i class="fa fa-github"></i></a></li>
             </ul>
         </div>
 
@@ -101,7 +101,7 @@
         function pop_WatershedKGofSaltperApplicationperkm2_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">Water shed recieves ' + (feature.properties['SaltSumK2'] ? feature.properties['SaltSumK2'] : 0) +' kg of salt per application per km2</td>\
+                        <td colspan="2">Water shed recieves ' + (feature.properties['SaltSumK2'] ? feature.properties['SaltSumK2'] : 0) +' kg of salt per application per km²</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -297,6 +297,7 @@
                 weight: 2.0,
                 fillOpacity: 0,
                 interactive: true,
+                opacity:.5                
             }
                     break;
                 default:
@@ -310,6 +311,7 @@
                 weight: 1.0,
                 fillOpacity: 0,
                 interactive: true,
+                opacity:.5
             }
         }}
         map.createPane('pane_WaterFeatures_3');
@@ -364,7 +366,7 @@
             style: style_RoadsWithin50MetersofWaterFeatures_4_0,
         });
         bounds_group.addLayer(layer_RoadsWithin50MetersofWaterFeatures_4);
-        map.addLayer(layer_RoadsWithin50MetersofWaterFeatures_4);
+        //map.addLayer(layer_RoadsWithin50MetersofWaterFeatures_4);
         var baseMaps = {};
         var layerControl = L.control.layers(baseMaps,{'Roads Within 50 Meters of Water Features': layer_RoadsWithin50MetersofWaterFeatures_4,'Water Features<br />': layer_WaterFeatures_3,'Roads<br /><table>': layer_Roads_2,'Watershed - KG of Salt per Application per km2<br /><table><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_790503107100.png" /></td><td>7.9050 - 31.0710</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_3107106308501.png" /></td><td>31.0710 - 63.0850</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_63085011820302.png" /></td><td>63.0850 - 118.2030</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_118203015409503.png" /></td><td>118.2030 - 154.0950</td></tr><tr><td style="text-align: center;"><img src="legend/WatershedKGofSaltperApplicationperkm2_1_154095019251504.png" /></td><td>154.0950 - 192.5150</td></tr></table>': layer_WatershedKGofSaltperApplicationperkm2_1,"Basemap": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
         var htmlObject = layerControl.getContainer();
@@ -389,7 +391,8 @@
                 pane:   '<p>Here in Nova Scotia we have to deal with unsafe road conditions each winter and salting the roads is an unfortunate nescessity.</p>' +
                         '<p>The salt we put on our roads eventually finds it\'s way into our water table and can contaminate our environment.</p>' +
                         '<p>This map shows the watersheds in the Greenwood/Kingston area and is color coded to visualize the amount of salt they recieve per square kilometer of the watershed.</p>' +
-                        '<p>Water features are also shown and roads which come within 50 meters of these water features are highlighted as well.</p>'
+                        '<p>Water features are also shown and roads which come within 50 meters of these water features are highlighted as well.</p>' +
+                        '<p>Click on a watershed polygon to see the amount of road salt it recieves per application per km².</p>'   
             })
             // add a tab with a click callback, initially disabled
             .addPanel({
